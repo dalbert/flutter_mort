@@ -1,12 +1,12 @@
 Mort:
-    ☐ replace demo page with form fields for creating a mortgage
-    ☐ add navigation bar that automatically moved from left side to bottom in response to screen width
-    ☐ implemented amortization calculation
-    ☐ screen to display amortization
-    ☐ ability to set monthly extra payments
-    ☐ display top-level metrics with the amortization
-        ☐ month & year of final mortgage payment
-        ☐ total interest paid
-        ☐ money saved compared to default amortization
-        ☐ equivalent APY% of saved interest (to compare to investing that money instead of paying down mortgage)
-    ☐ make amort' screen editable - adding/editing ad hoc extra payments in any month 
+    ☐ replace demo page with form fields for creating a mortgage @1h
+    ☐ add navigation bar that automatically moved from left side to bottom in response to screen width @30m
+    ☐ implemented amortization calculation @1h
+    ☐ screen to display amortization @3h
+    ☐ ability to set monthly recurring extra payments (new form field and new param for BE calc) @30m @high
+    ☐ display top-level metrics with the amortization (new funcs to calc these, new widgets to show them) 
+        ☐ month & year of final mortgage payment @1h
+        ☐ total interest paid @1h
+        ☐ money saved compared to default amortization @1h
+        ☐ equivalent APY% of saved interest (to compare to investing that money instead of paying down mortgage) @3h
+    ☐ make amort' screen editable - adding/editing ad hoc extra payments in any month @3h @low
