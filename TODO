@@ -1,6 +1,6 @@
 Mort:
     ☐ replace demo page with form fields for creating a mortgage
     ☐ add navigation bar that automatically moved from left side to bottom in response to screen width
-    ☐ implemented ammortization calculation
-    ☐ screen to display ammortization
-    ☐ make ammort' screen editable - adding/editing ad hoc extra payments in any month 
+    ☐ implemented amortization calculation
+    ☐ screen to display amortization
+    ☐ make amort' screen editable - adding/editing ad hoc extra payments in any month 

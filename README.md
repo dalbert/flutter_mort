@@ -1,6 +1,6 @@
 # flutter_mort
 
-A new Flutter project.
+Mort Mort Feingold calculates your mortgage amortization. 
 
 ## Getting Started
 
