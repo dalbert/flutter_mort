@@ -50,14 +50,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
@@ -85,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   TextFormField(
+                    controller: controller,
                     decoration: const InputDecoration(
                         hintText:
                             'Enter the principle balance of your mortgage'),
@@ -100,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       if (_formKey.currentState!.validate()) {
                         //Process form data
                         debugPrint('$_counter');
-                        debugPrint('$_formKey');
+                        debugPrint(controller.text);
                       }
                     },
                     child: const Text('Submit'),
