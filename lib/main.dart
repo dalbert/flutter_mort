@@ -87,29 +87,39 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    //TODO: add a Text widget to act as the label for this form field
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: controller,
-                      decoration: const InputDecoration(
-                          hintText:
-                              'Enter the principle balance of your mortgage',
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                              width: 10,
-                            ),
+                  Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Balance: "),
+                      ),
+                      Flexible(
+                        //This container is required when placing a TextFormField inside a Row <shrug> - https://stackoverflow.com/questions/45986093/textfield-inside-of-row-causes-layout-exception-unable-to-calculate-size
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            controller: controller,
+                            decoration: const InputDecoration(
+                                hintText:
+                                    'Enter the principle balance of your mortgage',
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.red,
+                                    width: 10,
+                                  ),
+                                ),
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 169, 209, 229)),
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a number';
+                              }
+                              return null;
+                            },
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 169, 209, 229)),
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a number';
-                        }
-                        return null;
-                      },
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -127,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
