@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mort/mortgage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -86,17 +87,29 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  TextFormField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                        hintText:
-                            'Enter the principle balance of your mortgage'),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a number';
-                      }
-                      return null;
-                    },
+                  Padding(
+                    //TODO: add a Text widget to act as the label for this form field
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: controller,
+                      decoration: const InputDecoration(
+                          hintText:
+                              'Enter the principle balance of your mortgage',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.red,
+                              width: 10,
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 169, 209, 229)),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a number';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
