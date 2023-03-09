@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final balanceController = TextEditingController();
   final rateController = TextEditingController();
   final termController = TextEditingController();
+  Mortgage? mortgage;
 
   @override
   void dispose() {
@@ -55,7 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _saveMortgage() {
-    setState(() {});
+    setState(() {
+      double balance = double.tryParse(balanceController.text.trim()) as double;
+      double rate = double.tryParse(rateController.text.trim()) as double;
+      double term = double.tryParse(termController.text.trim()) as double;
+      mortgage = Mortgage("farts", balance, rate, term);
+    });
   }
 
   // This method is rerun every time setState is called
@@ -81,10 +87,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //Process form data
-                        debugPrint("balance: ${balanceController.text}");
-                        debugPrint("rate: ${rateController.text}");
-                        debugPrint("term: ${termController.text}");
+                        _saveMortgage();
+                        debugPrint("balance: ${mortgage!.principleBalance}");
+                        debugPrint("rate: ${mortgage!.interestRate}");
+                        debugPrint("term: ${mortgage!.termMonths}");
+                        debugPrint(mortgage!.name);
                       }
                     },
                     child: const Text('Submit'),
