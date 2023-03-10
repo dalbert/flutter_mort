@@ -93,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         debugPrint("term: ${mortgage!.term}");
                         debugPrint(mortgage!.name);
                         debugPrint(mortgage!.calcMonthlyPayment().toString());
+                        debugPrint(
+                            'Lifetime Interest: ${mortgage!.calcLifetimeInterest().toString()}');
                       }
                     },
                     child: const Text('Submit'),
