@@ -88,10 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _saveMortgage();
-                        debugPrint("balance: ${mortgage!.principleBalance}");
-                        debugPrint("rate: ${mortgage!.interestRate}");
-                        debugPrint("term: ${mortgage!.termMonths}");
+                        debugPrint("balance: ${mortgage!.balance}");
+                        debugPrint("rate: ${mortgage!.rate}");
+                        debugPrint("term: ${mortgage!.term}");
                         debugPrint(mortgage!.name);
+                        debugPrint(mortgage!.calcMonthlyPayment().toString());
                       }
                     },
                     child: const Text('Submit'),
