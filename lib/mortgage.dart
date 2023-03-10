@@ -19,7 +19,6 @@ class Mortgage {
     P = The total amount of your loan
     I = Your interest rate, as a monthly percentage
     N = The total amount of months in your timeline for paying off your mortgage
-
 */
   double calcMonthlyPayment() {
     double monthlyRate = rate / 100 / 12;
