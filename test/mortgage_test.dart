@@ -17,4 +17,11 @@ void main() {
     expect((mortgage.calcMonthlyPayment() * pow(10, 2)).round() / pow(10, 2),
         1463.48);
   });
+
+  test('Spot check the Periods inside the amortization List', () {
+    Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
+    expect(mortgage.amortization[0].startBalance, 225400);
+    expect(mortgage.amortization[1].startBalance, 224335.67);
+    expect(mortgage.amortization[179].endBalance, 0);
+  });
 }

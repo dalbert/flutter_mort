@@ -17,10 +17,11 @@ class Mortgage {
     this.term,
   ) {
     payment = calcMonthlyPayment(); // assumes no balloon payment at end of term
-    Period period;
+    amortization.add(Period(balance, getMonthlyRate(), payment));
     for (var i = 0; i < term; i++) {
-      period = Period(balance, getMonthlyRate(), payment);
-      amortization.add(period);
+      amortization
+          .add(Period(amortization[i]._newBalance, getMonthlyRate(), payment));
+      debugPrint(amortization[i]._newBalance.toString());
     }
   }
 
@@ -48,11 +49,10 @@ class Mortgage {
     double lifeTimeInterest = 0;
     double balance = this.balance;
     for (var i = 0; i < term; i++) {
-      interest = (balance * rate / 100 / 12);
+      interest = (balance * getMonthlyRate());
       balance = balance + interest - payment;
       lifeTimeInterest += interest;
-      debugPrint(
-          'balance: $balance  interest: $interest  prinPay: ${payment - interest}');
+//      debugPrint('balance: $balance  interest: $interest  prinPay: ${payment - interest}');
     }
     return lifeTimeInterest;
   }
@@ -62,11 +62,14 @@ class Period {
   final double _balance;
   final double _rate;
   final double _payment;
-  late final double newBalance;
-  late final double interestPaid;
+  late final double _newBalance;
+  late final double _interestPaid;
 
   Period(this._balance, this._rate, this._payment) {
-    interestPaid = (_balance * _rate / 100 / 12);
-    newBalance = _balance + interestPaid - _payment;
+    _interestPaid = (_balance * _rate);
+    _newBalance = _balance + _interestPaid - _payment;
   }
+
+  get startBalance => num.parse(_balance.toStringAsFixed(2));
+  get endBalance => num.parse(_newBalance.toStringAsFixed(2));
 }
