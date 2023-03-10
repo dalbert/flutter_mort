@@ -8,11 +8,10 @@
 import 'dart:math';
 
 import 'package:flutter_mort/mortgage.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
-  testWidgets('Example calcs to test formulae in the Mortgage model',
-      (WidgetTester tester) async {
+  test('Example calcs to test formulae in the Mortgage model', () {
     // Instantiate a Mortgage with example properties.
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
     expect((mortgage.calcMonthlyPayment() * pow(10, 2)).round() / pow(10, 2),
