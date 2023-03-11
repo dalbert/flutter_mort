@@ -74,9 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Form(
+          child: Column(
+        children: [
+          Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,9 +98,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
                     },
                     child: const Text('Submit'),
-                  )
+                  ),
                 ],
-              ))),
+              )),
+          if (mortgage != null) amortization(),
+        ],
+      )),
     );
   }
 
@@ -209,6 +212,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget amortization() {
+    return Flexible(
+      child: ListView(
+          children: mortgage!.amortization
+              .map((e) => Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(e.startBalance.toString()),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(e.endBalance.toString()),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(e.interest.toString()),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(e.principle.toString()),
+                      ),
+                    ],
+                  ))
+              .toList()),
     );
   }
 }

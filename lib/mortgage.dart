@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class Mortgage {
@@ -10,6 +9,10 @@ class Mortgage {
   late final double payment;
   late final List<Period> amortization = <Period>[];
 
+  /*
+    Sets all the basic parameters and populates an amortization. 
+    TODO: make the amortization private. 
+  */
   Mortgage(
     this.name,
     this.balance,
@@ -72,4 +75,6 @@ class Period {
 
   get startBalance => num.parse(_balance.toStringAsFixed(2));
   get endBalance => num.parse(_newBalance.toStringAsFixed(2));
+  get interest => num.parse(_interestPaid.toStringAsFixed(2));
+  get principle => num.parse((_payment - _interestPaid).toStringAsFixed(2));
 }
