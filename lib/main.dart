@@ -221,6 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: mortgage!.amortization
               .map((e) => Row(
                     children: [
+                      // TODO: add $ to each value; more formatting, eg. a card for each Row; a header row
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(e.startBalance.toString()),
