@@ -11,7 +11,7 @@ import 'package:flutter_mort/mortgage.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('MOrtgage.calcMonthlyPayment do duh good math', () {
+  test('Mortgage.calcMonthlyPayment do duh good math', () {
     // Instantiate a Mortgage with example properties.
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
     expect((mortgage.payment * pow(10, 2)).round() / pow(10, 2), 1463.48);
@@ -21,6 +21,11 @@ void main() {
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
     expect(mortgage.amortization[0].startBalance, 225400);
     expect(mortgage.amortization[1].startBalance, 224335.67);
+    expect(mortgage.amortization[178].endBalance, 1460.86);
+  });
+
+  test('The last entry in the amortization lands at a zer0 balance', () {
+    Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
     expect(mortgage.amortization[179].endBalance, 0);
   });
 
