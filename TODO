@@ -1,10 +1,11 @@
 Mort:
     ✔ replace demo page with form fields for creating a mortgage @1h @done(23-03-10 10:04)
     ✔ implement monthly payment calculation @30m @done(23-03-10 10:05)
-    ☐ implement amortization calculation @1h
+    ✔ implement amortization calculation @1h @done(23-03-11 19:43)
     ☐ add navigation bar that automatically moved from left side to bottom in response to screen width @30m
-    ☐ screen to display amortization @3h
-    ☐ ability to set monthly recurring extra payments (new form field and new param for BE calc) @30m @high
+    ☐ screen to display amortization @3h @started(23-03-11 19:43)
+    ☐ ability to set monthly recurring extra payments (new form field and new param for BE calc) @1h @high
+    ☐ ability to set one-time extra payments within any Period (month) @2h
     ☐ display top-level metrics with the amortization (new funcs to calc these, new widgets to show them) 
         ☐ month & year of final mortgage payment @1h
         ☐ total interest paid @1h
