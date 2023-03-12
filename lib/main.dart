@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final rateController = TextEditingController();
   final termController = TextEditingController();
   final currencyFormat = NumberFormat.currency(locale: "en_US", symbol: '\$');
-  late Mortgage mortgage;
+  Mortgage? mortgage;
   List<Mortgage> mortgages = [];
 
   @override
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       double rate = double.tryParse(rateController.text.trim()) as double;
       double term = double.tryParse(termController.text.trim()) as double;
       mortgage = Mortgage("farts", balance, rate, term);
-      mortgages.add(mortgage);
+      mortgages.add(mortgage!);
     });
   }
 
@@ -83,13 +83,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _saveMortgage();
-                        debugPrint("balance: ${mortgage.balance}");
-                        debugPrint("rate: ${mortgage.rate}");
-                        debugPrint("term: ${mortgage.term}");
-                        debugPrint(mortgage.name);
-                        debugPrint(mortgage.payment.toString());
+                        debugPrint("balance: ${mortgage!.balance}");
+                        debugPrint("rate: ${mortgage!.rate}");
+                        debugPrint("term: ${mortgage!.term}");
+                        debugPrint(mortgage!.name);
+                        debugPrint(mortgage!.payment.toString());
                         debugPrint(
-                            'Lifetime Interest: ${mortgage.lifetimeInterest}');
+                            'Lifetime Interest: ${mortgage!.lifetimeInterest}');
                       }
                     },
                     child: const Text('Submit'),
@@ -242,7 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget amortization() {
     return Flexible(
       child: ListView(
-          children: mortgage.amortization
+          children: mortgage!.amortization
               .map((e) => Card(
                     child: Row(
                       children: [
@@ -285,7 +285,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const Text('Lifetime Interest'),
                 Text(
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                    currencyFormat.format(mortgage.lifetimeInterest)),
+                    currencyFormat.format(mortgage!.lifetimeInterest)),
               ],
             ),
           ),
@@ -296,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 const Text('Monthly Payment'),
-                Text(currencyFormat.format(mortgage.payment)),
+                Text(currencyFormat.format(mortgage!.payment)),
               ],
             ),
           ),
