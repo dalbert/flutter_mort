@@ -11,7 +11,7 @@ import 'package:flutter_mort/mortgage.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('Example calcs to test formulae in the Mortgage model', () {
+  test('MOrtgage.calcMonthlyPayment do duh good math', () {
     // Instantiate a Mortgage with example properties.
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
     expect((mortgage.calcMonthlyPayment() * pow(10, 2)).round() / pow(10, 2),
@@ -23,5 +23,11 @@ void main() {
     expect(mortgage.amortization[0].startBalance, 225400);
     expect(mortgage.amortization[1].startBalance, 224335.67);
     expect(mortgage.amortization[179].endBalance, 0);
+  });
+
+  test('Mortgage.calcLifetimeInterest() does math good', () {
+    Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
+    expect((mortgage.calcLifetimeInterest() * pow(10, 2)).round() / pow(10, 2),
+        38026.15);
   });
 }
