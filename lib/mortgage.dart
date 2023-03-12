@@ -46,8 +46,6 @@ class Mortgage {
         (pow(1 + monthlyRate, term) - 1);
   }
 
-  //TODO: refactor this to use class-level payment and amortization
-  //(ie sum up the pre-calc'd interest payments)
   double calcLifetimeInterest() {
     double lifeTimeInterest = 0;
     for (Period period in amortization) {
