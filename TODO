@@ -11,4 +11,5 @@ Mort:
         ✔ total interest paid @1h @done(23-03-12 11:17)
         ☐ money saved compared to default amortization @1h
         ☐ equivalent APY% of saved interest (to compare to investing that money instead of paying down mortgage) @3h
+            this will need an input to provide any $cost incurred to obtain the new mortgage params, eg closing costs on a refi or points 
     ☐ make amort' screen editable - adding/editing ad hoc extra payments in any month @3h @low
