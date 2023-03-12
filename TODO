@@ -8,7 +8,7 @@ Mort:
     ☐ ability to set one-time extra payments within any Period (month) @2h
     ☐ display top-level metrics with the amortization (new funcs to calc these, new widgets to show them) 
         ☐ month & year of final mortgage payment @1h
-        ☐ total interest paid @1h
+        ✔ total interest paid @1h @done(23-03-12 11:17)
         ☐ money saved compared to default amortization @1h
         ☐ equivalent APY% of saved interest (to compare to investing that money instead of paying down mortgage) @3h
     ☐ make amort' screen editable - adding/editing ad hoc extra payments in any month @3h @low

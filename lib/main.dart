@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final balanceController = TextEditingController();
   final rateController = TextEditingController();
   final termController = TextEditingController();
+  final currencyFormat = NumberFormat.currency(locale: "en_US", symbol: '\$');
   Mortgage? mortgage;
 
   @override
@@ -93,8 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               )),
-          if (mortgage != null) amortHeader() else amortPlaceholder(),
-          if (mortgage != null) amortization(),
+          if (mortgage != null)
+            ...getAmortizationWidgets()
+          else
+            amortPlaceholder(),
         ],
       )),
     );
@@ -208,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget amortHeader() {
+  Widget amortizationHeader() {
     return Row(
       children: const [
         Padding(
@@ -232,7 +235,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget amortization() {
-    var currencyFormat = NumberFormat.currency(locale: "en_US", symbol: '\$');
     return Flexible(
       child: ListView(
           children: mortgage!.amortization
@@ -261,6 +263,39 @@ class _MyHomePageState extends State<MyHomePage> {
                   ))
               .toList()),
     );
+  }
+
+  Widget amortizationTopMetrics() {
+    return Row(
+      children: [
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Text('Lifetime Interest'),
+                Text(currencyFormat.format(mortgage!.calcLifetimeInterest())),
+              ],
+            ),
+          ),
+        ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Text('Monthly Payment'),
+                Text(currencyFormat.format(mortgage!.calcMonthlyPayment())),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> getAmortizationWidgets() {
+    return [amortizationTopMetrics(), amortizationHeader(), amortization()];
   }
 
   Widget amortPlaceholder() {
