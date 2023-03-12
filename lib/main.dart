@@ -116,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: balanceController,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   hintText: 'Enter the principle balance of your mortgage',
                   border: OutlineInputBorder(
@@ -152,6 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: rateController,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   hintText: 'Enter the interest rate of your mortgage',
                   border: OutlineInputBorder(
@@ -188,6 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: termController,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   hintText: 'Enter the length of your mortgage (months)',
                   border: OutlineInputBorder(
@@ -269,6 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Row(
       children: [
         Card(
+          color: Colors.amber,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -280,6 +284,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Card(
+          color: Colors.orange,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
