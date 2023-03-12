@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mort/mortgage.dart';
+import "package:intl/intl.dart";
 
 void main() {
   runApp(const MyApp());
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         debugPrint(mortgage!.name);
                         debugPrint(mortgage!.calcMonthlyPayment().toString());
                         debugPrint(
-                            'Lifetime Interest: ${mortgage!.calcLifetimeInterest().toString()}');
+                            'Lifetime Interest: ${mortgage!.calcLifetimeInterest()}');
                       }
                     },
                     child: const Text('Submit'),
@@ -231,28 +232,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget amortization() {
+    var currencyFormat = NumberFormat.currency(locale: "en_US", symbol: '\$');
     return Flexible(
       child: ListView(
           children: mortgage!.amortization
               .map((e) => Card(
                     child: Row(
                       children: [
-                        // TODO: add $ to each value; more formatting, eg. a card for each Row; a header row
+                        // TODO: add $ to each value
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(e.startBalance.toString()),
+                          child: Text(currencyFormat.format(e.startBalance)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(e.endBalance.toString()),
+                          child: Text(currencyFormat.format(e.endBalance)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(e.interest.toString()),
+                          child: Text(currencyFormat.format(e.interest)),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(e.principle.toString()),
+                          child: Text(currencyFormat.format(e.principle)),
                         ),
                       ],
                     ),
