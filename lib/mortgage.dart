@@ -21,9 +21,9 @@ class Mortgage {
   ) {
     payment = calcMonthlyPayment(); // assumes no balloon payment at end of term
     amortization.add(Period(balance, getMonthlyRate(), payment));
-    for (var i = 0; i < term; i++) {
-      amortization
-          .add(Period(amortization[i]._newBalance, getMonthlyRate(), payment));
+    for (var i = 1; i < term; i++) {
+      amortization.add(
+          Period(amortization[i - 1].endBalance, getMonthlyRate(), payment));
       debugPrint(amortization[i]._newBalance.toString());
     }
   }
