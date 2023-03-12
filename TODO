@@ -5,6 +5,7 @@ Mort:
     ☐ remove amortization from display @15m
     ☐ implement append-only list of Mortgage models; append a new one each time the submit button is tapped @45m
     ☐ implement display of the AOL of Mortgages, eg like the demo word-pairing app @1h
+        ☐ make each Mortgage card clickable, goto new page that displays the full amortization table @1h
     ☐ implement color-coded comparison btwn the Mortgages in the AOL
     ☐ screen to display amortization @3h @started(23-03-11 19:43)
     ☐ ability to set monthly recurring extra payments (new form field and new param for BE calc) @1h @high
