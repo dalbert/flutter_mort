@@ -25,15 +25,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -101,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               )),
+          if (mortgage != null) amortHeader() else amortPlaceholder(),
           if (mortgage != null) amortization(),
         ],
       )),
@@ -215,32 +207,66 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget amortHeader() {
+    return Row(
+      children: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('start'),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('end'),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('interest'),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('principle'),
+        ),
+      ],
+    );
+  }
+
   Widget amortization() {
     return Flexible(
       child: ListView(
           children: mortgage!.amortization
-              .map((e) => Row(
-                    children: [
-                      // TODO: add $ to each value; more formatting, eg. a card for each Row; a header row
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(e.startBalance.toString()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(e.endBalance.toString()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(e.interest.toString()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(e.principle.toString()),
-                      ),
-                    ],
+              .map((e) => Card(
+                    child: Row(
+                      children: [
+                        // TODO: add $ to each value; more formatting, eg. a card for each Row; a header row
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(e.startBalance.toString()),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(e.endBalance.toString()),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(e.interest.toString()),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(e.principle.toString()),
+                        ),
+                      ],
+                    ),
                   ))
               .toList()),
+    );
+  }
+
+  Widget amortPlaceholder() {
+    return const Card(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text('enter params above to get the thing'),
+      ),
     );
   }
 }
