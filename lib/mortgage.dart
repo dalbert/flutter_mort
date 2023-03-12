@@ -49,15 +49,9 @@ class Mortgage {
   //TODO: refactor this to use class-level payment and amortization
   //(ie sum up the pre-calc'd interest payments)
   double calcLifetimeInterest() {
-    final double payment = calcMonthlyPayment();
-    double interest = 0;
     double lifeTimeInterest = 0;
-    double balance = this.balance;
-    for (var i = 0; i < term; i++) {
-      interest = (balance * getMonthlyRate());
-      balance = balance + interest - payment;
-      lifeTimeInterest += interest;
-//      debugPrint('balance: $balance  interest: $interest  prinPay: ${payment - interest}');
+    for (Period period in amortization) {
+      lifeTimeInterest += period._interestPaid;
     }
     return lifeTimeInterest;
   }
@@ -75,6 +69,8 @@ class Period {
     _newBalance = _balance + _interestPaid - _payment;
   }
 
+  // TODO: store without the decimal truncation, move that formatting up into display code
+  // - preserves precision for calculations, handle truncation at display time
   get startBalance => num.parse(_balance.toStringAsFixed(2));
   get endBalance => num.parse(_newBalance.toStringAsFixed(2));
   get interest => num.parse(_interestPaid.toStringAsFixed(2));

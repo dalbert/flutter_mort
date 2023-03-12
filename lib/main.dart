@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Mortgage Calculator',
       theme: ThemeData(
         // This is the theme of your application.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(title: 'Your Mortgage'),
     );
@@ -272,7 +272,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Row(
       children: [
         Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
           color: Colors.amber,
+          elevation: 2,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -284,7 +287,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Card(
-          color: Colors.orange,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
