@@ -19,7 +19,8 @@ class Mortgage {
     this.rate,
     this.term,
   ) {
-    payment = calcMonthlyPayment(); // assumes no balloon payment at end of term
+    payment =
+        _calcMonthlyPayment(); // assumes no balloon payment at end of term
     amortization.add(Period(balance, getMonthlyRate(), payment));
     for (var i = 1; i < term; i++) {
       amortization.add(
@@ -39,7 +40,7 @@ class Mortgage {
     I = Your interest rate, as a monthly percentage
     N = The total amount of months in your timeline for paying off your mortgage
   */
-  double calcMonthlyPayment() {
+  double _calcMonthlyPayment() {
     final double monthlyRate = rate / 100 / 12;
     return balance *
         (monthlyRate * pow(1 + monthlyRate, term)) /

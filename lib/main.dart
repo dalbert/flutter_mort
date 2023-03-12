@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         debugPrint("rate: ${mortgage!.rate}");
                         debugPrint("term: ${mortgage!.term}");
                         debugPrint(mortgage!.name);
-                        debugPrint(mortgage!.calcMonthlyPayment().toString());
+                        debugPrint(mortgage!.payment.toString());
                         debugPrint(
                             'Lifetime Interest: ${mortgage!.calcLifetimeInterest()}');
                       }
@@ -292,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 const Text('Monthly Payment'),
-                Text(currencyFormat.format(mortgage!.calcMonthlyPayment())),
+                Text(currencyFormat.format(mortgage!.payment)),
               ],
             ),
           ),

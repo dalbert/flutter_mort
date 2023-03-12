@@ -14,8 +14,7 @@ void main() {
   test('MOrtgage.calcMonthlyPayment do duh good math', () {
     // Instantiate a Mortgage with example properties.
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
-    expect((mortgage.calcMonthlyPayment() * pow(10, 2)).round() / pow(10, 2),
-        1463.48);
+    expect((mortgage.payment * pow(10, 2)).round() / pow(10, 2), 1463.48);
   });
 
   test('Spot check the Periods inside the amortization List', () {
