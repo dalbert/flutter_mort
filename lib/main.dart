@@ -281,7 +281,9 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 const Text('Lifetime Interest'),
-                Text(currencyFormat.format(mortgage!.lifetimeInterest)),
+                Text(
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    currencyFormat.format(mortgage!.lifetimeInterest)),
               ],
             ),
           ),
