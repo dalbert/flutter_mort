@@ -47,7 +47,8 @@ class Mortgage {
         (pow(1 + monthlyRate, term) - 1);
   }
 
-  double calcLifetimeInterest() {
+  get lifetimeInterest => _calcLifetimeInterest();
+  double _calcLifetimeInterest() {
     double lifeTimeInterest = 0;
     for (Period period in amortization) {
       lifeTimeInterest += period._interestPaid;

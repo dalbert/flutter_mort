@@ -26,7 +26,7 @@ void main() {
 
   test('Mortgage.calcLifetimeInterest() does math good', () {
     Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
-    expect((mortgage.calcLifetimeInterest() * pow(10, 2)).round() / pow(10, 2),
+    expect((mortgage.lifetimeInterest * pow(10, 2)).round() / pow(10, 2),
         38026.14);
   });
 }
