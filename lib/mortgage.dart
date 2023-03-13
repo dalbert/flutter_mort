@@ -51,9 +51,21 @@ class Mortgage {
   double _calcLifetimeInterest() {
     double lifeTimeInterest = 0;
     for (Period period in amortization) {
-      lifeTimeInterest += period._interestPaid;
+      lifeTimeInterest += period._interest;
     }
     return lifeTimeInterest;
+  }
+
+/* 
+  periods is probably in months; to get the first 1 year of interest, pass in 12
+*/
+  double getPartialInterest(int periods) {
+    double interest = 0;
+    for (Period period in amortization.sublist(0, periods)) {
+      interest += period._interest;
+      debugPrint('interest = ${period.interest}    sum = $interest');
+    }
+    return interest;
   }
 }
 
@@ -62,17 +74,17 @@ class Period {
   final double _rate;
   final double _payment;
   late final double _newBalance;
-  late final double _interestPaid;
+  late final double _interest;
 
   Period(this._balance, this._rate, this._payment) {
-    _interestPaid = (_balance * _rate);
-    _newBalance = _balance + _interestPaid - _payment;
+    _interest = (_balance * _rate);
+    _newBalance = _balance + _interest - _payment;
   }
 
   // TODO: store without the decimal truncation, move that formatting up into display code
   // - preserves precision for calculations, handle truncation at display time
   get startBalance => num.parse(_balance.toStringAsFixed(2));
   get endBalance => num.parse(_newBalance.toStringAsFixed(2));
-  get interest => num.parse(_interestPaid.toStringAsFixed(2));
-  get principle => num.parse((_payment - _interestPaid).toStringAsFixed(2));
+  get interest => num.parse(_interest.toStringAsFixed(2));
+  get principle => num.parse((_payment - _interest).toStringAsFixed(2));
 }

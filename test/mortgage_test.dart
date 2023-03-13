@@ -34,4 +34,10 @@ void main() {
     expect((mortgage.lifetimeInterest * pow(10, 2)).round() / pow(10, 2),
         38026.14);
   });
+
+  test('Mortgage.getPartialInterest() does math good', () {
+    Mortgage mortgage = Mortgage('farts', 225400, 2.125, 180);
+    expect((mortgage.getPartialInterest(12) * pow(10, 2)).round() / pow(10, 2),
+        4664.62);
+  });
 }
