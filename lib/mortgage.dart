@@ -82,8 +82,6 @@ class Period {
     _newBalance = _balance + _interest - _payment;
   }
 
-  // TODO: store without the decimal truncation, move that formatting up into display code
-  // - preserves precision for calculations, handle truncation at display time
   get startBalance => num.parse(_balance.toStringAsFixed(2));
   get endBalance => num.parse(_newBalance.toStringAsFixed(2));
   get interest => num.parse(_interest.toStringAsFixed(2));
