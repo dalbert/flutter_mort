@@ -15,9 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mortgage Calculator',
       theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.green,
-      ),
+          // This is the theme of your application.
+          primarySwatch: Colors.green,
+          colorScheme: const ColorScheme.highContrastDark(
+              primary: Colors.green,
+              secondary: Colors.blue,
+              tertiary: Colors.yellow)),
       home: const MyHomePage(title: 'Your Mortgage'),
     );
   }
@@ -98,10 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               )),
           mortgageHistory(),
-          // if (mortgage != null)
-          //   ...getAmortizationWidgets()
-          // else
-          //   amortPlaceholder(),
+          if (mortgage != null)
+            ...getAmortizationWidgets()
+          else
+            amortPlaceholder(),
         ],
       )),
     );
@@ -122,18 +125,14 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              style: const TextStyle(fontSize: 20),
               controller: balanceController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   hintText: 'Enter the principle balance of your mortgage',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 10,
-                    ),
-                  ),
+                  border: const OutlineInputBorder(),
                   filled: true,
-                  fillColor: Color.fromARGB(255, 169, 209, 229)),
+                  fillColor: Theme.of(context).colorScheme.secondary),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a number';
@@ -162,20 +161,24 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              style: const TextStyle(fontSize: 20),
               controller: rateController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   hintText: 'Enter the interest rate of your mortgage',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.yellow,
                       width: 10,
                     ),
                   ),
                   filled: true,
-                  fillColor: Color.fromARGB(255, 169, 209, 229)),
+                  fillColor: Theme.of(context).colorScheme.secondary),
               validator: (String? value) {
-                if (value == null || value.isEmpty) {
+                if (value == null ||
+                    value.isEmpty ||
+                    num.parse(value) < 0 ||
+                    num.parse(value) > 100) {
                   return 'Please enter a number btwn 0.0 - 100.0';
                 }
                 return null;
@@ -202,18 +205,19 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              style: const TextStyle(fontSize: 20),
               controller: termController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   hintText: 'Enter the length of your mortgage (months)',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.yellow,
                       width: 10,
                     ),
                   ),
                   filled: true,
-                  fillColor: Color.fromARGB(255, 169, 209, 229)),
+                  fillColor: Theme.of(context).colorScheme.secondary),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a number btwn 0.0 - 100.0';
@@ -316,6 +320,12 @@ class MortgageRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    var labelStyle = theme.textTheme.labelLarge!
+        .copyWith(color: theme.colorScheme.onPrimary);
+    var dollarStyle =
+        theme.textTheme.labelLarge!.copyWith(fontWeight: FontWeight.bold);
+
     return Row(
       children: [
         Card(
@@ -327,9 +337,9 @@ class MortgageRow extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const Text('Lifetime Interest'),
+                Text('Lifetime Interest', style: labelStyle),
                 Text(
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: dollarStyle,
                     currencyFormat.format(mortgage!.lifetimeInterest)),
               ],
             ),
