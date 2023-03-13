@@ -108,9 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget balanceField() {
     return Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("Balance: "),
+        const SizedBox(
+          width: 125,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Balance: "),
+          ),
         ),
         Flexible(
           //This container is required when placing a TextFormField inside a Row <shrug> - https://stackoverflow.com/questions/45986093/textfield-inside-of-row-causes-layout-exception-unable-to-calculate-size
@@ -145,9 +148,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget rateField() {
     return Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("Interest Rate: "),
+        const SizedBox(
+          width: 125,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Interest Rate: "),
+          ),
         ),
         Flexible(
           //This container is required when placing a TextFormField inside a Row <shrug> - https://stackoverflow.com/questions/45986093/textfield-inside-of-row-causes-layout-exception-unable-to-calculate-size
@@ -182,9 +188,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget termField() {
     return Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text("Term (months): "),
+        const SizedBox(
+          width: 125,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Term (months): "),
+          ),
         ),
         Flexible(
           //This container is required when placing a TextFormField inside a Row <shrug> - https://stackoverflow.com/questions/45986093/textfield-inside-of-row-causes-layout-exception-unable-to-calculate-size
