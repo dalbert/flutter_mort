@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> getAmortizationWidgets() {
-    return [mortgageHistory(), amortizationHeader(), amortization()];
+    return [amortizationHeader(), amortization()];
   }
 
   Widget amortPlaceholder() {

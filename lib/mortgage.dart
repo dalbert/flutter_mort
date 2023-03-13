@@ -8,6 +8,7 @@ class Mortgage {
   final double term; // in months
   late final double payment;
   late final List<Period> amortization = <Period>[];
+  late final double _lifetimeInterest;
 
   /*
     Sets all the basic parameters and populates an amortization. 
@@ -25,8 +26,8 @@ class Mortgage {
     for (var i = 1; i < term; i++) {
       amortization.add(
           Period(amortization[i - 1].endBalance, getMonthlyRate(), payment));
-      debugPrint(amortization[i]._newBalance.toString());
     }
+    _lifetimeInterest = _calcLifetimeInterest();
   }
 
   double getMonthlyRate() {
@@ -47,7 +48,7 @@ class Mortgage {
         (pow(1 + monthlyRate, term) - 1);
   }
 
-  get lifetimeInterest => _calcLifetimeInterest();
+  get lifetimeInterest => num.parse(_lifetimeInterest.toStringAsFixed(2));
   double _calcLifetimeInterest() {
     double lifeTimeInterest = 0;
     for (Period period in amortization) {
