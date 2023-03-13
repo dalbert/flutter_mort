@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  // TODO: prevent duplicates in the mortgages List
   void _saveMortgage() {
     setState(() {
       double balance = double.tryParse(balanceController.text.trim()) as double;
@@ -96,10 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               )),
-          if (mortgage != null)
-            ...getAmortizationWidgets()
-          else
-            amortPlaceholder(),
+          mortgageHistory(),
+          // if (mortgage != null)
+          //   ...getAmortizationWidgets()
+          // else
+          //   amortPlaceholder(),
         ],
       )),
     );
@@ -255,7 +257,6 @@ class _MyHomePageState extends State<MyHomePage> {
               .map((e) => Card(
                     child: Row(
                       children: [
-                        // TODO: add $ to each value
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(currencyFormat.format(e.startBalance)),
@@ -279,7 +280,42 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget amortizationTopMetrics() {
+  Widget mortgageHistory() {
+    return Flexible(
+      child: ListView(
+          children: mortgages.reversed // most recent rendered at the top
+              .map((mortgage) => MortgageRow(
+                  currencyFormat: currencyFormat, mortgage: mortgage))
+              .toList()),
+    );
+  }
+
+  List<Widget> getAmortizationWidgets() {
+    return [mortgageHistory(), amortizationHeader(), amortization()];
+  }
+
+  Widget amortPlaceholder() {
+    return const Card(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text('enter params above to get the thing'),
+      ),
+    );
+  }
+}
+
+class MortgageRow extends StatelessWidget {
+  const MortgageRow({
+    super.key,
+    required this.currencyFormat,
+    required this.mortgage,
+  });
+
+  final NumberFormat currencyFormat;
+  final Mortgage? mortgage;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Card(
@@ -311,19 +347,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ],
-    );
-  }
-
-  List<Widget> getAmortizationWidgets() {
-    return [amortizationTopMetrics(), amortizationHeader(), amortization()];
-  }
-
-  Widget amortPlaceholder() {
-    return const Card(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text('enter params above to get the thing'),
-      ),
     );
   }
 }
