@@ -7,7 +7,7 @@ class Mortgage {
   final double rate; // as a percent, ie 100x the actual rate
   final double term; // in months
   late final double payment;
-  late final List<Period> amortization = <Period>[];
+  late final List<Period> _amortization = <Period>[];
   late final double _lifetimeInterest;
 
   /*
@@ -22,13 +22,17 @@ class Mortgage {
   ) {
     payment =
         _calcMonthlyPayment(); // assumes no balloon payment at end of term
-    amortization.add(Period(balance, getMonthlyRate(), payment));
+    _amortization.add(Period(balance, getMonthlyRate(), payment));
     for (var i = 1; i < term; i++) {
-      amortization.add(
-          Period(amortization[i - 1].endBalance, getMonthlyRate(), payment));
+      _amortization.add(
+          Period(_amortization[i - 1].endBalance, getMonthlyRate(), payment));
     }
     _lifetimeInterest = _calcLifetimeInterest();
   }
+
+// does this return a separate copy? GOOD
+// is it a new copy each time the getter is called? BAD
+  get amortization => [..._amortization];
 
   double getMonthlyRate() {
     return rate / 100 / 12;
@@ -51,7 +55,7 @@ class Mortgage {
   get lifetimeInterest => num.parse(_lifetimeInterest.toStringAsFixed(2));
   double _calcLifetimeInterest() {
     double lifeTimeInterest = 0;
-    for (Period period in amortization) {
+    for (Period period in _amortization) {
       lifeTimeInterest += period._interest;
     }
     return lifeTimeInterest;
@@ -62,7 +66,7 @@ class Mortgage {
 */
   double getPartialInterest(int periods) {
     double interest = 0;
-    for (Period period in amortization.sublist(0, periods)) {
+    for (Period period in _amortization.sublist(0, periods)) {
       interest += period._interest;
       debugPrint('interest = ${period.interest}    sum = $interest');
     }
