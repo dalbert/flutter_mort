@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final termController = TextEditingController();
   final currencyFormat = NumberFormat.currency(locale: "en_US", symbol: '\$');
   Mortgage? mortgage;
-  List<Mortgage> mortgages = [];
+  MortgageList mortgages = MortgageList();
 
   @override
   void dispose() {

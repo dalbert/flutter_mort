@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
 
 class Mortgage {
   final String name;
@@ -31,7 +30,7 @@ class Mortgage {
 
 // does this return a separate copy? GOOD
 // is it a new copy each time the getter is called? BAD
-  get amortization => [..._amortization];
+  List<Period> get amortization => [..._amortization];
 
   double getMonthlyRate() {
     return rate / 100 / 12;
@@ -67,7 +66,6 @@ class Mortgage {
     double interest = 0;
     for (Period period in _amortization.sublist(0, periods)) {
       interest += period._interest;
-      debugPrint('interest = ${period.interest}    sum = $interest');
     }
     return interest;
   }
@@ -89,4 +87,22 @@ class Period {
   get endBalance => num.parse(_newBalance.toStringAsFixed(2));
   get interest => num.parse(_interest.toStringAsFixed(2));
   get principle => num.parse((_payment - _interest).toStringAsFixed(2));
+}
+
+class MortgageList {
+  final List<Mortgage> list = [];
+  MortgageList();
+
+  add(Mortgage mortgage) => list.add(mortgage);
+  int get length => list.length;
+  Mortgage operator [](int index) => list[index];
+  void operator []=(int index, Mortgage value) {
+    list[index] = value;
+  }
+
+// returns the interal list, without the wrapping MortgageList functionality
+// allows you to utilize List functionality like .map()
+// this may be error-prone
+  Iterable<Mortgage> get all => list;
+  Iterable<Mortgage> get reversed => list.reversed;
 }
