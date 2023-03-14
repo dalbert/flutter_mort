@@ -100,9 +100,8 @@ class MortgageList {
     list[index] = value;
   }
 
-// returns the interal list, without the wrapping MortgageList functionality
 // allows you to utilize List functionality like .map()
-// this may be error-prone
-  Iterable<Mortgage> get all => list;
-  Iterable<Mortgage> get reversed => list.reversed;
+// returning a copy to affect read-only semantics on the internal List
+  Iterable<Mortgage> get all => [...list];
+  Iterable<Mortgage> get reversed => [...list.reversed];
 }
