@@ -12,7 +12,6 @@ class Mortgage {
 
   /*
     Sets all the basic parameters and populates an amortization. 
-    TODO: make the amortization private. 
   */
   Mortgage(
     this.name,
