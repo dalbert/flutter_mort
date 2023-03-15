@@ -126,4 +126,13 @@ class MortgageList {
     );
     return MortgageList.fromList(sortedMortgages);
   }
+
+  // TODO: write test for sortedByPayment
+  MortgageList get sortedByPayment {
+    var sortedMortgages = [...list];
+    sortedMortgages.sort(
+      (a, b) => a.payment.compareTo(b.payment),
+    );
+    return MortgageList.fromList(sortedMortgages);
+  }
 }

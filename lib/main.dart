@@ -284,10 +284,25 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget mortgageHistory() {
+  Widget mortgageHistory([int sortBy = 0]) {
+    MortgageList displayMortgages;
+    switch (sortBy) {
+      case 1: // sort by lifetime interest
+        displayMortgages = mortgages.sortedByLifetimeInterest;
+        break;
+      case 2: // sort by 5y interest
+        displayMortgages = mortgages.sortedBy5yInterest;
+        break;
+      case 3: // sort by monthly payment
+        displayMortgages = mortgages.sortedByPayment;
+        break;
+      default: // don't sort, just go with whatever order they are in currently
+        displayMortgages = mortgages;
+        break;
+    }
     return Flexible(
       child: ListView(
-          children: mortgages.reversed // most recent rendered at the top
+          children: displayMortgages.all
               .map((mortgage) => MortgageRow(
                   currencyFormat: currencyFormat, mortgage: mortgage))
               .toList()),
@@ -356,6 +371,17 @@ class MortgageRow extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Text('5 Year Interest'),
+                Text(currencyFormat.format(mortgage!.getPartialInterest(60))),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
