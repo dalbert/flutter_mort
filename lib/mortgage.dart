@@ -117,4 +117,13 @@ class MortgageList {
     );
     return MortgageList.fromList(sortedMortgages);
   }
+
+  // TODO: write test for sortedBy5yInterest
+  MortgageList get sortedBy5yInterest {
+    var sortedMortgages = [...list];
+    sortedMortgages.sort(
+      (a, b) => a.getPartialInterest(60).compareTo(b.getPartialInterest(60)),
+    );
+    return MortgageList.fromList(sortedMortgages);
+  }
 }

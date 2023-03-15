@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  // TODO: prevent duplicates in the mortgages List
+  // TODO: prevent duplicates in the mortgages List @low
   void _saveMortgage() {
     setState(() {
       double balance = double.tryParse(balanceController.text.trim()) as double;
