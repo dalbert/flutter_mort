@@ -50,7 +50,8 @@ class Mortgage {
         (pow(1 + monthlyRate, term) - 1);
   }
 
-  get lifetimeInterest => num.parse(_lifetimeInterest.toStringAsFixed(2));
+  double get lifetimeInterest =>
+      num.parse(_lifetimeInterest.toStringAsFixed(2)) as double;
   double _calcLifetimeInterest() {
     double lifeTimeInterest = 0;
     for (Period period in _amortization) {
@@ -90,11 +91,11 @@ class Period {
 }
 
 class MortgageList {
-  final List<Mortgage> list = [];
+  List<Mortgage> list = [];
   MortgageList();
+  MortgageList.fromList(this.list);
 
   add(Mortgage mortgage) => list.add(mortgage);
-  int get length => list.length;
   Mortgage operator [](int index) => list[index];
   void operator []=(int index, Mortgage value) {
     list[index] = value;
@@ -104,4 +105,16 @@ class MortgageList {
 // returning a copy to affect read-only semantics on the internal List
   Iterable<Mortgage> get all => [...list];
   Iterable<Mortgage> get reversed => [...list.reversed];
+
+/*
+  return a MortgageList where the mortgages are sorted from lowest 
+  LifetimeInterest to highest. 
+*/
+  MortgageList get sortedByLifetimeInterest {
+    var sortedMortgages = [...list];
+    sortedMortgages.sort(
+      (a, b) => a.lifetimeInterest.compareTo(b.lifetimeInterest),
+    );
+    return MortgageList.fromList(sortedMortgages);
+  }
 }

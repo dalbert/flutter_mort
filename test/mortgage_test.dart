@@ -40,4 +40,15 @@ void main() {
     expect((mortgage.getPartialInterest(12) * pow(10, 2)).round() / pow(10, 2),
         4664.62);
   });
+
+  test('MortgageList shit', () {
+    MortgageList mortgages = MortgageList();
+    mortgages.add(Mortgage('low', 225400, 2.125, 180));
+    mortgages.add(Mortgage('high', 225400, 2, 360));
+    mortgages.add(Mortgage('medium', 225400, 4.5, 180));
+    //MortgageList sortedMortgages = mortgages.sortedByLifetimeInterest;
+    expect(mortgages.sortedByLifetimeInterest[0].rate, 2.125);
+    expect(mortgages.sortedByLifetimeInterest[1].rate, 2);
+    expect(mortgages.sortedByLifetimeInterest[2].rate, 4.5);
+  });
 }
