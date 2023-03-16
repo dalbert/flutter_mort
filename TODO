@@ -19,7 +19,8 @@ Mort:
         ☐ money saved compared to default amortization @1h
         ☐ equivalent APY% of saved interest (to compare to investing that money instead of paying down mortgage) @3h
             this will need an input to provide any $cost incurred to obtain the new mortgage params, eg closing costs on a refi or points 
-    ☐ add navigation bar that automatically moved from left side to bottom in response to screen width @30m
+    ☐ add navigation bar that automatically moved from left side to bottom in response to screen width @30m @started(23-03-16 10:42) @doing @today @high
+    Split app into pages:
         ☐ Input: page for adding a mortgage @1h
         ☐ Home: page for viewing list of mortgages and sorting by different properties @1h
         ☐ Detail: page for viewing amortization of a single mortgage @1h
