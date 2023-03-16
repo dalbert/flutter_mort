@@ -36,6 +36,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var selectedIndex = 0;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final balanceController = TextEditingController();
   final rateController = TextEditingController();
@@ -66,47 +68,121 @@ class _MyHomePageState extends State<MyHomePage> {
   // This method is rerun every time setState is called
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
+    Widget page = const Center(
+      child: Text('butt'),
+    );
+    switch (selectedIndex) {
+      case 0:
+        page = const MortgagesPage();
+        break;
+      case 1:
+        //page = AmortizationPage();
+        break;
+      default:
+        throw UnimplementedError('no widget for $selectedIndex');
+    }
+
+    var mainArea = ColoredBox(
+      color: colorScheme.surfaceVariant,
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 100),
+        child: page,
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-          child: Column(
-        children: [
-          Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  balanceField(),
-                  rateField(),
-                  termField(),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _saveMortgage();
-                        debugPrint("balance: ${mortgage!.balance}");
-                        debugPrint("rate: ${mortgage!.rate}");
-                        debugPrint("term: ${mortgage!.term}");
-                        debugPrint(mortgage!.name);
-                        debugPrint(mortgage!.payment.toString());
-                        debugPrint(
-                            'Lifetime Interest: ${mortgage!.lifetimeInterest}');
-                      }
-                    },
-                    child: const Text('Submit'),
-                  ),
-                ],
-              )),
-          mortgageHistory(),
-          if (mortgage != null)
-            ...getAmortizationWidgets()
-          else
-            amortPlaceholder(),
-        ],
-      )),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth < 450) {
+            return Column(
+              children: [
+                // need to move most of the Widget tree into separate func per page which will be rendered here inside mainArea
+                // this will also move the navbar to the bottom; right now all the page content is below this navbar, while mainArea is above it
+                Expanded(child: mainArea),
+                SafeArea(
+                    child: BottomNavigationBar(
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.favorite),
+                      label: 'Favorites',
+                    ),
+                  ],
+                  currentIndex: selectedIndex,
+                  onTap: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                )),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        balanceField(),
+                        rateField(),
+                        termField(),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _saveMortgage();
+                              debugPrint('NARROW');
+                            }
+                          },
+                          child: const Text('Submit'),
+                        ),
+                      ],
+                    )),
+                mortgageHistory(),
+                if (mortgage != null)
+                  ...getAmortizationWidgets()
+                else
+                  amortPlaceholder(),
+              ],
+            );
+          } else {
+            return Column(
+              children: [
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        balanceField(),
+                        rateField(),
+                        termField(),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _saveMortgage();
+                              debugPrint("WIDELOAD");
+                            }
+                          },
+                          child: const Text('Submit'),
+                        ),
+                      ],
+                    )),
+                mortgageHistory(),
+                if (mortgage != null)
+                  ...getAmortizationWidgets()
+                else
+                  amortPlaceholder(),
+              ],
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -320,6 +396,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text('enter params above to get the thing'),
       ),
     );
+  }
+}
+
+class MortgagesPage extends StatelessWidget {
+  const MortgagesPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Text("farts");
   }
 }
 
